@@ -61,6 +61,9 @@ class CarWorldRenderer(WorldRender):
     canvas = self.renderTitle(world, displaysurf)
     self.renderScore(world, displaysurf, canvas)
     self.renderSpeed(world, displaysurf, canvas)
+    self.renderSignal(world, displaysurf, canvas)
+
+
 
   def renderTitle(self, world, displaysurf):
     fontSize = int(world.hero.width / 2.5)
@@ -80,6 +83,22 @@ class CarWorldRenderer(WorldRender):
       displaysurf.blit(text, textpos)
 
     return canvasPos
+
+  def renderSignal(self, world, displaysurf, canvas):
+    if not world.hasSignal:
+      pointsX = canvas[0][0]
+      pointsY = canvas[0][1] + canvas[1][1] * 5 + (world.hero.height / self.carPadding)
+
+      fontSize = int(world.hero.width / 4)
+      font = pygame.font.Font(None, fontSize)
+      score = int(world.hero.score / 10)
+      text = font.render("Signal Lost!", True, GameDefine.COLOR_FONT_CONSOLE)
+      textpos = text.get_rect()
+
+      textpos.x = pointsX
+      textpos.y = pointsY
+
+      displaysurf.blit(text, textpos)
 
   def renderScore(self, world, displaysurf, canvas):
     pointsX = canvas[0][0]

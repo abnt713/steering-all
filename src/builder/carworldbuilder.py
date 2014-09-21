@@ -1,5 +1,6 @@
 import worldbuilder
 from src.spawner.spawnercollector import *
+from src.interact.faceInteract import *
 from src.entities.carentity import *
 from src.world.carworld import *
 from src.world.drawing.carworldrender import *
@@ -12,6 +13,14 @@ class CarWorldBuilder (worldbuilder.WorldBuilder):
     self.spawner = SpawnerCollector()
     self.world = CarWorld(self, trails, worldWidth , hero.height * 5, (hero.height * 2) / 100)
     self.world.hero = hero
+
+    self.fthread = FaceInteract(1, 0)
+    self.fthread.start()
+
     self.world.addInteract(KeyboardInteract())
+    self.world.addInteract(self.fthread)
 
     self.worldRenderer = CarWorldRenderer(hero, trailPadding)
+
+  def dispose(self):
+    self.fthread.stop()

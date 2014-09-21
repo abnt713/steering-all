@@ -13,6 +13,7 @@ class CarWorld(world.World):
     self.actualDropspeed = dropspeed
     self.enemies = []
     self.gameOn = True
+    self.hasSignal = True
 
   def getTrailsCount(self):
     return self.trailsCount
@@ -27,6 +28,12 @@ class CarWorld(world.World):
     self.enemies.remove(index)
 
   def listen(self, inputResult):
+
+    if inputResult == GameDefine.COMMAND_SIGNAL_LOST:
+      self.hasSignal = False
+    else:
+      self.hasSignal = True
+
     if inputResult == GameDefine.COMMAND_RIGHT:
       if self.hero.activeTrail < (self.trailsCount - 1):
         self.hero.activeTrail += 1
@@ -37,6 +44,7 @@ class CarWorld(world.World):
       self.hero.isBoosting = True
     elif inputResult == GameDefine.COMMAND_UNBOOST:
       self.hero.isBoosting = False
+
     elif inputResult == GameDefine.COMMAND_EXIT:
       self.gameOn = False
 

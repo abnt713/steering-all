@@ -27,6 +27,7 @@ def main():
     worldManager.step()
     pygame.display.update()
 
+  worldManager.dispose()
 
 if __name__=='__main__':
   main()

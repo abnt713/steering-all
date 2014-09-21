@@ -1,7 +1,10 @@
 class GameDefine:
 
   # Command definitions
-  COMMAND_EXIT = -1
+  COMMAND_EXIT = -3
+  COMMAND_SIGNAL_LOST = -2
+  COMMAND_SIGNAL_FOUND = -1
+  COMMAND_NONE = 0
   COMMAND_LEFT = 1
   COMMAND_RIGHT = 2
   COMMAND_BOOST = 3
@@ -15,7 +18,7 @@ class GameDefine:
   COLOR_FONT_CONSOLE = (0, 0, 0)
 
   # General Purpose settings
-  GAME_TITLE = "Steering Head"
+  GAME_TITLE = "Steering Key"
 
   SPEED_COLORS = [
     (113, 186, 53),

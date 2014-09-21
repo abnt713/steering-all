@@ -30,3 +30,6 @@ class WorldBuilder:
     height = self.world.height + self.worldRenderer.getExtraHeight()
 
     return (width, height)
+
+  def dispose(self):
+    pass
