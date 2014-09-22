@@ -1,7 +1,5 @@
 from src.builder.carworldbuilder import *
 from src.entities.carhero import *
-from src.spawner.spawnercollector import *
-from src.spawner.enemyspawner import *
 
 import pygame
 import os
@@ -12,11 +10,8 @@ def main():
   pygame.init()
 
   worldManager = CarWorldBuilder(CarHero(96, 128), 3)
-  worldManager.setSpawnerCollector(SpawnerCollector())
 
-  worldManager.addSpawner(EnemySpawner(2, 0))
-
-  displaysurf = pygame.display.set_mode(worldManager.getAdjustedDisplaySize(), pygame.NOFRAME)
+  displaysurf = pygame.display.set_mode(worldManager.getAdjustedDisplaySize(), pygame.FULLSCREEN)
   worldManager.fps = pygame.time.Clock()
 
   worldManager.setDisplaysurf(displaysurf)

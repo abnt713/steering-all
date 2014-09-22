@@ -18,6 +18,14 @@ class KeyboardInteract(interact.Interact):
       if event.type == QUIT:
         pygame.quit()
         sys.exit()
+        
+        
+      if event.type == pygame.MOUSEBUTTONUP:
+        if event.button == 3:
+          self.listener.listen(GameDefine.COMMAND_RIGHT)
+
+        if event.button == 1:
+          self.listener.listen(GameDefine.COMMAND_LEFT)
 
       if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_LEFT and not self.goingLeft:
