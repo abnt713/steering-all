@@ -10,17 +10,17 @@ from src.interact.mouseInteract import *
 
 class CarWorldBuilder (worldbuilder.WorldBuilder):
 
-  def __init__(self, hero, trails, trailPadding = 4):
+  def __init__(self, hero, trails, trailPadding = 4, fps = 60):
     worldWidth = (hero.width * trails) + (hero.width / trailPadding) * trails * 2
     self.spawner = SpawnerCollector()
-    self.addSpawner(EnemySpawner(2, 0))
+    self.addSpawner(EnemySpawner(2, 1))
     self.world = CarWorld(self, trails, worldWidth , hero.height * 5, (hero.height * 2) / 100)
     self.world = CarWorld(self, trails, worldWidth , hero.height * 5, 4)
     self.world.hero = hero
 
-    self.fthread = FaceInteract(1, 0)
-    self.fthread.start()
-    self.world.addInteract(self.fthread)
+    #self.fthread = FaceInteract(1, 0)
+    #self.fthread.start()
+    #self.world.addInteract(self.fthread)
 
     self.world.addInteract(KeyboardInteract())
     self.world.addInteract(MouseInteract())
@@ -28,4 +28,5 @@ class CarWorldBuilder (worldbuilder.WorldBuilder):
     self.worldRenderer = CarWorldRenderer(hero, trailPadding)
 
   def dispose(self):
-    self.fthread.stop()
+    pass
+    #self.fthread.stop()

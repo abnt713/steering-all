@@ -1,6 +1,6 @@
 class WorldBuilder:
 
-  fps = None
+  fps = 60
 
   def addSpawner(self, spawner):
     self.spawner.addSpawner(spawner)

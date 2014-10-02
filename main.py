@@ -12,13 +12,14 @@ def main():
   worldManager = CarWorldBuilder(CarHero(96, 128), 3)
 
   displaysurf = pygame.display.set_mode(worldManager.getAdjustedDisplaySize(), pygame.FULLSCREEN)
-  worldManager.fps = pygame.time.Clock()
+  clock = pygame.time.Clock()
 
   worldManager.setDisplaysurf(displaysurf)
 
   pygame.display.set_caption('Steering Head')
 
   while worldManager.world.gameOn:
+    clock.tick(worldManager.fps)
     worldManager.step()
     pygame.display.update()
 

@@ -1,5 +1,7 @@
 class GameDefine:
 
+  DOT_DIMENSION = 32
+
   # Command definitions
   COMMAND_EXIT = -3
   COMMAND_SIGNAL_LOST = -2
