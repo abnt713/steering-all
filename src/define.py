@@ -1,6 +1,8 @@
 class GameDefine:
 
   DOT_DIMENSION = 32
+  WINDOW_WIDTH = DOT_DIMENSION * 30
+  WINDOW_HEIGHT = DOT_DIMENSION * 20
 
   # Command definitions
   COMMAND_EXIT = -3
@@ -29,3 +31,7 @@ class GameDefine:
     (247, 254, 34),
     (254, 34, 36)
   ]
+
+
+def dotget(count, scale = 1.0):
+  return int(count * GameDefine.DOT_DIMENSION * scale)

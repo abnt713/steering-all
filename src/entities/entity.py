@@ -15,3 +15,12 @@ class Entity:
 
   def getRect(self):
     return ((self.x, self.y), (self.width, self.height))
+
+  def centerX(self, totalWidth):
+    self.x = (totalWidth / 2) - (self.width / 2)
+
+  def centerY(self, totalHeight):
+    self.y = (totalHeight / 2) - (self.height / 2)
+
+  def draw(self, displaysurf):
+    displaysurf.blit(self.surface, (self.x, self.y))
