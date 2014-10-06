@@ -8,6 +8,7 @@ from src.dot.entities.dotgoblet import DotGoblet
 from src.dot.entities.dotflag import DotFlag
 from src.dot.entities.dotkog import DotKog
 from src.dot.entities.dotheart import DotHeart
+from src.draw.dottext import DotText
 
 import os
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -43,11 +44,31 @@ def main():
   kog.rightOf(goblet)
   kog.centerY(totalHeight)
 
+  maintext = DotText("INICIAR JOGO", 32, (0, 0, 0), (208, 208, 208))
+  maintext.centerRelativeX(goblet)
+  maintext.marginTop(dotget(1))
+  maintext.below(goblet)
+
+  hearttext = DotText("CREDITOS", 24, (0, 0, 0), (208, 208, 208))
+  hearttext.marginTop(dotget(1) * kog.dotScale)
+  hearttext.centerRelativeX(kog)
+  hearttext.below(kog)
+
+  racetext = DotText("OPCOES", 24, (0, 0, 0), (208, 208, 208))
+  racetext.marginTop(dotget(1) * flag.dotScale)
+  racetext.centerRelativeX(flag)
+  racetext.below(flag)
+
   while True:
     displaysurf.fill((208, 208, 208));
     flag.draw(displaysurf)
     kog.draw(displaysurf)
+
     goblet.draw(displaysurf)
+
+    maintext.draw(displaysurf)
+    hearttext.draw(displaysurf)
+    racetext.draw(displaysurf)
 
     pygame.display.update()
 

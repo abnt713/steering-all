@@ -33,3 +33,10 @@ class RelativeEntity(Entity):
 
   def marginBottom(self, margin):
     self.margin[3] = margin
+
+
+  def centerRelativeX(self, entity):
+    self.x = entity.x + (entity.width / 2) - (self.width / 2)
+
+  def centerRelativeY(self, entity):
+    self.y = entity.y + (entity.height / 2) - (self.height / 2)

@@ -19,7 +19,7 @@ def main():
 
     pygame.quit()
   except:
-    traceback.print_exc()
+    #traceback.print_exc()
     pygame.quit()
 
 if __name__=='__main__':
