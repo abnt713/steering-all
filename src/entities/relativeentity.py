@@ -6,7 +6,6 @@ class RelativeEntity(Entity):
     Entity.__init__(self, width, height)
     self.margin = [0, 0, 0, 0]
 
-
   def below(self, entity):
     self.y = entity.y + entity.height + self.margin[1]
 

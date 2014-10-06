@@ -7,6 +7,7 @@ from src.dot.entities.dotlog import DotLog
 from src.dot.entities.dotgoblet import DotGoblet
 from src.dot.entities.dotflag import DotFlag
 from src.dot.entities.dotkog import DotKog
+from src.dot.entities.dotheart import DotHeart
 
 import os
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -14,7 +15,7 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 def main():
   pygame.init()
 
-  kog = DotKog()
+  kog = DotHeart()
   goblet = DotGoblet()
   flag = DotFlag()
 
