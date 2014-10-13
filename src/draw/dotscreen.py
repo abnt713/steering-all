@@ -17,16 +17,27 @@ class DotScreen:
     self.fillColor = (255, 255, 255)
 
     self.interacts = []
+    self.evtInteracts = []
 
   def notifyInteracts(self):
     for interact in self.interacts:
       interact.checkInteraction()
 
+    events = pygame.event.get()
+    for evtInteract in self.evtInteracts:
+      evtInteract.checkEventInteraction(events)
+
   def addInteract(self, interact):
     self.interacts.append(interact)
 
+  def addEventInteract(self, interact):
+    self.evtInteracts.append(interact)
+
   def setAllInteractsListener(self, listener):
     for interact in self.interacts:
+      interact.setListener(listener)
+
+    for interact in self.evtInteracts:
       interact.setListener(listener)
 
   def setFPS(fps):

@@ -2,6 +2,7 @@ import pygame
 import traceback
 from src.draw.dotscreen import DotScreen
 from src.interact.keyboardinteract import *
+from src.interact.mouseinteract import *
 
 from src.define import GameDefine
 from src.world.dot.logosplashworld import LogoSplashWorld
@@ -11,8 +12,9 @@ import os
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 def main():
-  screen = DotScreen(dotget(GameDefine.WINDOW_WIDTH), dotget(GameDefine.WINDOW_HEIGHT), 30)
-  screen.addInteract(KeyboardInteract())
+  screen = DotScreen(dotget(GameDefine.WINDOW_WIDTH), dotget(GameDefine.WINDOW_HEIGHT), 60)
+  screen.addEventInteract(KeyboardInteract())
+  screen.addEventInteract(MouseInteract())
   screen.setWorld(LogoSplashWorld())
 
   try:

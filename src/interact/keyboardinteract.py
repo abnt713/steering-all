@@ -1,31 +1,23 @@
-import interact
+import evtInteract
 import pygame
 import sys
 
 from src.define import *
 from pygame.locals import *
 
-class KeyboardInteract(interact.Interact):
+class KeyboardInteract(evtInteract.EvtInteract):
 
   def __init__(self):
+    evtInteract.EvtInteract.__init__(self)
     self.goingRight = False
     self.goingLeft = False
 
   def checkInteraction(self):
-    events = pygame.event.get()
-    for event in events:
+    for event in self.events:
 
       if event.type == QUIT:
         pygame.quit()
         sys.exit()
-        
-        
-      if event.type == pygame.MOUSEBUTTONUP:
-        if event.button == 3:
-          self.listener.listen(GameDefine.COMMAND_RIGHT)
-
-        if event.button == 1:
-          self.listener.listen(GameDefine.COMMAND_LEFT)
 
       if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_LEFT and not self.goingLeft:

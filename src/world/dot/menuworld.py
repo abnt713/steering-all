@@ -17,7 +17,7 @@ class MenuWorld(dotworld.DotWorld):
     dotworld.DotWorld.__init__(self)
     self.isPressing = False
     self.initEntities()
-    self.selected = self.SELECTION_CREDITS
+    self.selected = self.SELECTION_RACE
 
   def onAttachScreen(self):
     self.drawMenu()
