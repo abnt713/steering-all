@@ -1,4 +1,6 @@
 import dotworld
+
+from menuworld import MenuWorld
 from src.define import *
 from src.dot.entities.dotufrn import DotUFRN
 from src.draw.dottext import DotText
@@ -30,28 +32,35 @@ class UfrnSplashWorld(dotworld.DotWorld):
 
     self.label.surface.set_alpha(self.alpha)
 
+  def listen(self, inputResult):
+    if inputResult == GameDefine.COMMAND_BOOST:
+      self.pause()
+
   def step(self):
-    self.changeAlpha()
+    if self.active:
+      self.changeAlpha()
 
-    self.logo.draw(self.screen.displaysurf)
-    self.label.draw(self.screen.displaysurf)
+      self.logo.draw(self.screen.displaysurf)
+      self.label.draw(self.screen.displaysurf)
 
-    self.counter += 1
-
-    if self.animState == 1:
-      self.alpha += 2
-
-      if self.alpha > 255:
-        self.animState = 2
-        self.counter = 0
-
-    if self.animState == 2:
       self.counter += 1
-      if self.counter > self.screen.fps * 3:
-        self.animState = 3
 
-    if self.animState == 3:
-      self.alpha -= 2
-      if self.alpha <= 0:
-        self.screen.fillColor = (0, 0, 0)
-        self.screen.setWorld(dotworld.DotWorld())
+      if self.animState == 1:
+        self.alpha += 2
+
+        if self.alpha > 255:
+          self.animState = 2
+          self.counter = 0
+
+      if self.animState == 2:
+        self.counter += 1
+        if self.counter > self.screen.fps * 3:
+          self.animState = 3
+
+      if self.animState == 3:
+        self.alpha -= 2
+        if self.alpha <= 0:
+          self.pause()
+    else:
+      self.screen.setWorld(MenuWorld())
+      del self

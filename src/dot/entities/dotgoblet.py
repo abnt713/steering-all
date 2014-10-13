@@ -30,4 +30,13 @@ class DotGoblet(src.dot.dotentity.DotEntity):
       [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0]
     ]
 
-    src.dot.dotentity.DotEntity.__init__(self, grid, res, 0.75)
+    src.dot.dotentity.DotEntity.__init__(self, grid, res)
+
+  def setSmall(self):
+    self.setDotScale(0.25)
+
+  def setMedium(self):
+    self.setDotScale(0.5)
+
+  def setLarge(self):
+    self.setDotScale(0.75)

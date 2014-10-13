@@ -1,8 +1,10 @@
 class GameDefine:
 
   DOT_DIMENSION = 32
-  WINDOW_WIDTH = DOT_DIMENSION * 31
-  WINDOW_HEIGHT = DOT_DIMENSION * 21
+
+  # Window dimensions (in Dots)
+  WINDOW_WIDTH = 31
+  WINDOW_HEIGHT = 21
 
   # Command definitions
   COMMAND_EXIT = -3

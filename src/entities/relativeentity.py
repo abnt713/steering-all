@@ -35,6 +35,19 @@ class RelativeEntity(Entity):
     self.margin[3] = margin
 
 
+  def alignLeft(self):
+    self.x = 0 + self.margin[0]
+
+  def alignRight(self, width):
+    self.x = width - self.width - self.margin[2]
+
+  def alignTop(self):
+    self.y = 0 + self.margin[1]
+
+  def alignBottom(self, height):
+    self.y = height - self.height - self.margin[3]
+
+
   def centerRelativeX(self, entity):
     self.x = entity.x + (entity.width / 2) - (self.width / 2)
 

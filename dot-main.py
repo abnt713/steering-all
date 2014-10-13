@@ -17,11 +17,11 @@ def main():
   pygame.init()
 
   kog = DotHeart()
-  goblet = DotGoblet()
+  goblet = DotHeart()
   flag = DotFlag()
 
-  totalWidth = GameDefine.WINDOW_WIDTH
-  totalHeight = GameDefine.WINDOW_HEIGHT
+  totalWidth = dotget(GameDefine.WINDOW_WIDTH)
+  totalHeight = dotget(GameDefine.WINDOW_HEIGHT)
   windowDim = (int(totalWidth), int(totalHeight))
   displaysurf = pygame.display.set_mode(windowDim)
 
