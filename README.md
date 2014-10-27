@@ -30,8 +30,6 @@ python game.py
 ```
 **Aproveite o jogo!**
 
----
-
 
   
   
