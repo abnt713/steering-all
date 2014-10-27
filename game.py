@@ -12,7 +12,7 @@ import os
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 def main():
-  screen = DotScreen(dotget(GameDefine.WINDOW_WIDTH), dotget(GameDefine.WINDOW_HEIGHT), 60)
+  screen = DotScreen(dotget(GameDefine.WINDOW_WIDTH), dotget(GameDefine.WINDOW_HEIGHT), GameDefine.FPS)
   screen.addEventInteract(KeyboardInteract())
   screen.addEventInteract(MouseInteract())
   screen.setWorld(LogoSplashWorld())

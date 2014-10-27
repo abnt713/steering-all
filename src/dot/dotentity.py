@@ -13,3 +13,9 @@ class DotEntity(DotGrid):
 
   def setLarge(self):
     pass
+
+  def step(self):
+    pass
+
+  def handleEvent(self, inputResult):
+    pass

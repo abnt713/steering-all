@@ -15,7 +15,7 @@ class CarWorldRenderer(WorldRender):
 
   def render(self, world, displaysurf):
     displaysurf.fill(GameDefine.COLOR_TRAIL);
-    self.counter = self.counter + 1
+    self.counter += 1
     self.renderTrails(world, displaysurf)
     self.renderInterface(world, displaysurf)
     self.renderHero(world, displaysurf)

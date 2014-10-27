@@ -8,6 +8,7 @@ class DotScreen:
     self.height = screenHeight
     self.fps = fps
     self.on = True
+    self.ms = 0
 
     windowDim = (int(screenWidth), int(screenHeight))
     self.displaysurf = pygame.display.set_mode(windowDim, screenMode)
@@ -56,7 +57,7 @@ class DotScreen:
 
   def step(self):
     self.notifyInteracts()
-    self.clock.tick(self.fps)
+    self.ms = self.clock.tick(self.fps)
     self.displaysurf.fill(self.fillColor)
 
     if self.world is not None:

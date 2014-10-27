@@ -19,6 +19,12 @@ class DotGrid(RelativeEntity):
 
     self.setDotScale(dotScale)
 
+  def setDotRes(self, res):
+    self.dotRes = res
+
+  def setDotGrid(self, grid):
+    self.grid = grid
+
   def setDotScale(self, dotScale = 1.0):
     self.dotDim = GameDefine.DOT_DIMENSION * dotScale
     self.width = self.dotDim * self.dotWidth
