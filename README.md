@@ -4,14 +4,11 @@ Steering All
 
 A retro like racing game with the option to control your vehicle with different things, like your face or a drawing
 
----
-
 ## Sobre o projeto ##
 O Steering All (podemos repensar no título) é um projeto desenvolvido em Python que visa o uso de diferentes interfaces para o controle de um jogo simples estilo retrô.
 
 A ideia de desenvolver algo assim surgiu graças à disciplina Tópicos Especiais em Engenharia de Software II - Projeto de Artefatos Físicos de Interação. O jogo faz uso, atualmente, do teclado, mouse e face para controle do carrinho.
 
----
 
 ## Como executar ##
 
@@ -31,7 +28,7 @@ Antes de mais nada, tenha certeza que sua máquina possui:
 ```
 python game.py
 ```
-3. Aproveite o jogo!
+** Aproveite o jogo! **
 
 ---
 
