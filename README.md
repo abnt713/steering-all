@@ -28,7 +28,7 @@ Antes de mais nada, tenha certeza que sua máquina possui:
 ```
 python game.py
 ```
-** Aproveite o jogo! **
+**Aproveite o jogo!**
 
 ---
 
