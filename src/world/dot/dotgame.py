@@ -9,16 +9,17 @@ from src.dot.entities.dottrail import DotTrail
 
 
 class DotGame(dotworld.DotWorld):
-    def __init__(self, lives=3, score=0):
+    def __init__(self, lives=3, score=0, level=1):
         self.score = score
         self.lives = lives
+        self.level = level
         self.hud = DotHUD(lives)
         self.enemySpawner = None
         dotworld.DotWorld.__init__(self)
 
 
     def onAttachScreen(self):
-        self.trail = DotTrail(self.screen, self.score)
+        self.trail = DotTrail(self.screen, self.score, self.level)
         self.trail.createSurface()
         self.trail.alignTop()
         self.trail.centerX(self.screen.width)
@@ -27,7 +28,7 @@ class DotGame(dotworld.DotWorld):
         self.hud.alignLeft()
         self.hud.alignTop()
 
-        self.enemySpawner = DotCarSpawner(1, 24)
+        self.enemySpawner = DotCarSpawner(3, 1)
         # self.borderSpawner = DotBorderSpawner()
 
     def listen(self, inputResult):
@@ -44,6 +45,7 @@ class DotGame(dotworld.DotWorld):
 
         self.hud.set_score(self.trail.score / GameDefine.SCORE_DECIMAL)
         self.hud.set_speed(self.trail.actualFallSpeed / self.trail.defaultFallSpeed)
+        self.hud.set_level(self.trail.level)
         self.hud.draw(self.screen.displaysurf)
 
         if self.lives <= 0:
@@ -51,5 +53,5 @@ class DotGame(dotworld.DotWorld):
             del self
 
         elif not self.trail.isActive:
-            self.screen.setWorld(DotGame(self.lives - 1, self.trail.score))
+            self.screen.setWorld(DotGame(self.lives - 1, self.trail.score, self.trail.level))
             del self

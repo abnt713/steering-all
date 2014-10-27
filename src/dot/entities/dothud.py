@@ -25,16 +25,25 @@ class DotHUD(src.dot.dotcollection.DotCollection):
         self.set_score(0)
         self.addChild(self.scorelabel)
 
+        # Speed
         self.speedlabel = DotText("Speed: 0", 32, (0, 0, 0), (255, 255, 255))
         self.set_speed(0)
         self.addChild(self.speedlabel)
 
+        # Level
+        self.levellabel = DotText("Level: 0", 32, (0, 0, 0), (255, 255, 255))
+        self.set_level(1)
+        self.addChild(self.levellabel)
+
+        # Lives
         self.liveslabel = DotText("Lives: " + str(lives), 32, (0, 0, 0), (255, 255, 255))
         self.liveslabel.marginTop(dotget(2))
-        self.liveslabel.below(self.speedlabel)
+        self.liveslabel.below(self.levellabel)
         self.liveslabel.centerRelativeX(self)
 
         self.addChild(self.liveslabel)
+
+
 
 
     def set_score(self, score):
@@ -42,6 +51,12 @@ class DotHUD(src.dot.dotcollection.DotCollection):
         self.scorelabel.marginTop(dotget(2))
         self.scorelabel.alignTop()
         self.scorelabel.centerRelativeX(self)
+
+    def set_level(self, level):
+        self.levellabel.setText("Level: " + str(level))
+        self.levellabel.marginTop(dotget(1))
+        self.levellabel.below(self.speedlabel)
+        self.levellabel.centerRelativeX(self)
 
     def set_speed(self, speed):
         self.speedlabel.setText("Speed: " + str(speed))

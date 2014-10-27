@@ -9,12 +9,15 @@ from src.define import *
 
 class DotTrail(src.dot.dotcollection.DotCollection):
 
-    def __init__(self, screen, score):
+    def __init__(self, screen, score, level):
         res = [
             "assets/img/gray-brick.png"
         ]
 
         self.score = score
+        self.level = level
+        self.levelbase = 1000 * GameDefine.SCORE_DECIMAL
+        self.levellimit = self.levelbase * level
 
         self.isActive = True
         self.shouldFall = False
@@ -24,7 +27,8 @@ class DotTrail(src.dot.dotcollection.DotCollection):
         self.boostTime = 0
 
         self.screen = screen
-        self.defaultFallSpeed = 20
+        self.basespeed = 4
+        self.defaultFallSpeed = self.basespeed + (self.level * 10)
         self.actualFallSpeed = self.defaultFallSpeed
 
         self.spawnMoment = 0
@@ -88,6 +92,13 @@ class DotTrail(src.dot.dotcollection.DotCollection):
     def resetGame(self):
         self.isActive = False
 
+    def updateLevel(self):
+        if self.score > self.levellimit and self.level < 15:
+            self.level += 1
+            self.levellimit = self.levelbase * self.level
+            self.defaultFallSpeed = self.basespeed + (self.level * 10)
+
+
     def updateFallSpeed(self):
         if self.boostTime <= 0:
             boostFactor = 1
@@ -112,16 +123,17 @@ class DotTrail(src.dot.dotcollection.DotCollection):
         self.actualFallSpeed = int(self.defaultFallSpeed * boostFactor)
 
     def draw(self, displaysurf):
+        self.shouldFall = False
         if self.spawnMoment > self.getFallMoment():
             self.shouldFall = True
             self.spawnMoment = 0
 
         self.spawnMoment += self.actualFallSpeed
+
         self.score += self.actualFallSpeed
         self.checkCollide()
         src.dot.dotcollection.DotCollection.draw(self, displaysurf)
 
+        self.updateLevel()
         self.updateFallSpeed()
-        self.shouldFall = False
         self.cleanChildren()
-        print(len(self.children))

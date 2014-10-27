@@ -37,7 +37,8 @@ class DotCarSpawner (spawner.Spawner):
 
       self.latestSpawnTime = 0
 
-    self.latestSpawnTime += parent.actualFallSpeed
+    if parent.shouldFall:
+        self.latestSpawnTime += parent.dropHeight
 
   def addEnemyToWorld(self, parent, trail):
     enemy = DotCar()
