@@ -28,8 +28,8 @@ class DotGame(dotworld.DotWorld):
         self.hud.alignLeft()
         self.hud.alignTop()
 
-        self.enemySpawner = DotCarSpawner(3, 1)
-        # self.borderSpawner = DotBorderSpawner()
+        self.enemySpawner = DotCarSpawner(3, 2)
+        self.borderSpawner = DotBorderSpawner(1)
 
     def listen(self, inputResult):
         if inputResult == GameDefine.COMMAND_EXIT:
@@ -39,7 +39,7 @@ class DotGame(dotworld.DotWorld):
 
     def step(self):
         self.enemySpawner.spawn(self.trail)
-        # self.borderSpawner.spawn(self.trail)
+        self.borderSpawner.spawn(self.trail)
 
         self.trail.draw(self.screen.displaysurf)
 

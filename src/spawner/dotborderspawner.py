@@ -2,18 +2,34 @@ import spawner
 from src.dot.entities.dotborder import *
 from src.utils.dice import *
 
+
 class DotBorderSpawner (spawner.Spawner):
 
-  def spawn(self, parent):
-    if parent.shouldSpawn:
-      leftBorder = DotBorder()
-      rightBorder = DotBorder()
+    def __init__(self, padding):
+        self.latestSpawnTime = 0
+        self.padding = padding
 
-      leftBorder.y = 0 - leftBorder.height
-      rightBorder.y = 0 - rightBorder.height
+    def spawn(self, parent):
+        modelborder = DotBorder()
+        spawnLimit = int(modelborder.height * self.padding)
 
-      leftBorder.x = 0
-      rightBorder.x = parent.width - rightBorder.width
+        if self.latestSpawnTime > spawnLimit:
+            self.latestSpawnTime = 0
+            self.spawnchild(parent)
 
-      parent.addChild(leftBorder)
-      parent.addChild(rightBorder)
+        if parent.shouldFall:
+            self.latestSpawnTime += parent.dropHeight
+
+    def spawnchild(self, parent):
+        leftBorder = DotBorder()
+        rightBorder = DotBorder()
+
+        leftBorder.y = 0 - leftBorder.height
+        rightBorder.y = 0 - rightBorder.height
+
+        leftBorder.x = 0
+        rightBorder.x = parent.width - rightBorder.width
+
+        parent.addChild(leftBorder)
+        parent.addChild(rightBorder)
+
