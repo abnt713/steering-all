@@ -1,54 +1,98 @@
 import spawner
 from src.dot.entities.dotcar import *
+from src.dot.entities.dotradar import *
 from src.utils.dice import *
+
 
 class DotCarSpawner (spawner.Spawner):
 
-  def __init__(self, spawnFrequency, padding):
-    self.latestTrail = 0
-    self.latestSpawnTime = 0
-    self.spawnFrequency = spawnFrequency
-    self.padding = padding
-
-  def spawn(self, parent):
-    # Spawning based on world height and Car height
-    spawnLimit = int((parent.height / self.spawnFrequency) + (parent.hero.height * self.padding))
-
-    # Check if should spawn
-    if self.latestSpawnTime > spawnLimit:
-      maxTrail = 3
-
-      dice = Dice(0, maxTrail - 1)
-      electedTrail = dice.roll()
-
-      chance = (maxTrail - 2) * 10
-      doubleDice = PercentChance(chance)
-      shouldDouble = doubleDice.roll()
-
-      # Check if there is a 'double' enemy
-      if shouldDouble:
-        if electedTrail == (maxTrail - 1):
-          electedTrail -= 1
-
-        self.addEnemyToWorld(parent, electedTrail)
-        self.addEnemyToWorld(parent, electedTrail + 1)
-      else:
-        self.addEnemyToWorld(parent, electedTrail)
-
-      self.latestSpawnTime = 0
-
-    if parent.shouldFall:
-        self.latestSpawnTime += parent.dropHeight
-
-  def addEnemyToWorld(self, parent, trail):
-    enemy = DotCar()
-
-    enemy.setDotRes([
-      "assets/img/red-brick.png"
-    ]);
+    def __init__(self, spawnFrequency, padding):
+        self.latestSpawnTime = 0
+        self.spawnFrequency = spawnFrequency
+        self.padding = padding
+        self.canSpawn = True
+        self.lastWasRadar = False
+        self.lastWasDouble = False
 
 
-    enemy.y -= enemy.height
-    enemy.trail = trail
+    def spawn(self, parent):
+        if self.canSpawn:
+            # Spawning based on world height and Car height
+            spawnLimit = int((parent.height / self.spawnFrequency) + (parent.hero.height * self.padding))
 
-    parent.addChild(enemy)
+            # Check if should spawn
+            if self.latestSpawnTime > spawnLimit:
+
+                dice = PercentChance(10)
+                print("Radar chance: ")
+                spawnradar = dice.roll()
+                if spawnradar and not self.lastWasRadar:
+                    self.canSpawn = False
+                    self.spawnRadar(parent)
+                else:
+                    print("Speed chance: ")
+                    cardice = PercentChance(25)
+                    shouldDoubleSpeed = cardice.roll()
+                    if shouldDoubleSpeed and not self.lastWasRadar and not self.lastWasDouble:
+                        self.spawnCar(parent, 2)
+                    else:
+                        print("Spawning normal car")
+                        self.spawnCar(parent, 1)
+
+            if parent.shouldFall:
+                self.latestSpawnTime += parent.dropHeight
+
+
+    def spawnCar(self, parent, speed):
+
+        maxTrail = 3
+
+        dice = Dice(0, maxTrail - 1)
+        electedTrail = dice.roll()
+
+        chance = (maxTrail - 2) * 20
+        doubleDice = PercentChance(chance)
+        shouldDouble = doubleDice.roll()
+
+        # Check if there is a 'double' enemy
+        if shouldDouble and speed == 1:
+            if electedTrail == (maxTrail - 1):
+                electedTrail -= 1
+
+            self.addEnemyToWorld(parent, electedTrail, speed)
+            self.addEnemyToWorld(parent, electedTrail + 1, speed)
+            self.lastWasDouble = True
+            self.lastWasRadar = False
+        else:
+            self.lastWasRadar = False
+            self.lastWasDouble = False
+            self.addEnemyToWorld(parent, electedTrail, speed)
+
+        self.latestSpawnTime = 0
+
+    def spawnRadar(self, parent):
+        radar = DotRadar(13, 10, self)
+        radar.y -= radar.height
+
+        parent.addChild(radar)
+        self.lastWasRadar = True
+        self.lastWasDouble = False
+
+    def addEnemyToWorld(self, parent, trail, speed):
+        enemy = DotCar()
+
+        if speed == 1:
+            enemy.setDotRes([
+                "assets/img/red-brick.png"
+            ]);
+        else:
+            enemy.setDotRes([
+                "assets/img/yellow-brick.png"
+            ]);
+
+
+        enemy.y -= enemy.height
+        enemy.speed = speed
+        enemy.trail = trail
+
+        parent.addChild(enemy)

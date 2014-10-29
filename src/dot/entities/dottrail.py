@@ -74,8 +74,9 @@ class DotTrail(src.dot.dotcollection.DotCollection):
 
     def cleanChildren(self):
         for child in self.children:
-            if child.y > self.height + (child.height * 2):
+            if child.y > self.height + (self.hero.height * 2):
                 self.removeChild(child)
+                child.onDispose()
                 del child
 
     def removeChild(self, child):
@@ -84,10 +85,9 @@ class DotTrail(src.dot.dotcollection.DotCollection):
     def checkCollide(self):
         heroRect = pygame.Rect(self.hero.getCoordinates(), self.hero.getDimensions())
         for child in self.children:
-            if child.type == "enemy":
-                enemyRect = pygame.Rect(child.getCoordinates(), child.getDimensions())
-                if heroRect.colliderect(enemyRect):
-                    self.resetGame()
+            childRect = pygame.Rect(child.getCoordinates(), child.getDimensions())
+            if heroRect.colliderect(childRect):
+                child.notifyCollide(self.hero)
 
     def resetGame(self):
         self.isActive = False
