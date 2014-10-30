@@ -1,5 +1,7 @@
 import dotworld
 import gameover
+import pygame
+
 from src.spawner.dotcarspawner import *
 from src.spawner.dotborderspawner import *
 from src.dot.entities.dothud import DotHUD
@@ -9,7 +11,8 @@ from src.dot.entities.dottrail import DotTrail
 
 
 class DotGame(dotworld.DotWorld):
-    def __init__(self, lives=3, score=0, level=1):
+    def __init__(self, lives=3, score=0, level=1, startMusic = False):
+        self.startMusic = startMusic
         self.score = score
         self.lives = lives
         self.level = level
@@ -30,6 +33,11 @@ class DotGame(dotworld.DotWorld):
 
         self.enemySpawner = DotCarSpawner(3, 2)
         self.borderSpawner = DotBorderSpawner(1)
+
+        if self.startMusic:
+            pygame.mixer.music.load("assets/music/racing-theme.mp3")
+            pygame.mixer.music.set_volume(0.5)
+            pygame.mixer.music.play(-1, 0.0)
 
     def listen(self, inputResult):
         if inputResult == GameDefine.COMMAND_EXIT:

@@ -48,6 +48,7 @@ class DotTrail(src.dot.dotcollection.DotCollection):
         self.setDotAlpha(55)
 
         self.hero = DotHero()
+        self.hero.trail = 1
         self.hero.y = self.height - self.hero.height
         self.borders = []
         self.addChild(self.hero)
@@ -98,6 +99,7 @@ class DotTrail(src.dot.dotcollection.DotCollection):
 
     def updateLevel(self):
         if self.score > self.levellimit and self.level < 15:
+            play_sound('assets/music/effects/levelup.wav')
             self.level += 1
             self.levellimit = self.levelbase * self.level
             self.defaultFallSpeed = self.basespeed + (self.level * 10)

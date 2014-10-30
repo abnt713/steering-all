@@ -17,6 +17,7 @@ class MenuWorld(dotworld.DotWorld):
         dotworld.DotWorld.__init__(self)
 
         self.label = DotText("", 32)
+        self.logo = DotText("", 32, (0, 0, 0), (255, 255, 255), "assets/fonts/8-BIT-WONDER.ttf")
         self.goblet = DotGoblet()
         self.flag = DotFlag()
         self.heart = DotHeart()
@@ -36,6 +37,10 @@ class MenuWorld(dotworld.DotWorld):
         self.goblet = DotGoblet()
         self.flag = DotFlag()
         self.heart = DotHeart()
+
+        self.logo.setText("Steering All", 32, (0, 0, 0), (255, 255, 255), "assets/fonts/8-BIT-WONDER.ttf")
+        self.logo.x = dotget(3)
+        self.logo.centerX(self.screen.width)
 
         selectedItem = self.getSelectedItem()
         selectedItem.setMedium()
@@ -116,10 +121,11 @@ class MenuWorld(dotworld.DotWorld):
             self.isPressing = True
 
         if (inputResult == GameDefine.COMMAND_UNBOOST) and self.isPressing == True:
-            self.screen.setWorld(DotGame())
+            self.screen.setWorld(DotGame(3, 0, 1, True))
             del self
 
     def step(self):
+        self.logo.draw(self.screen.displaysurf)
         self.goblet.draw(self.screen.displaysurf)
         self.flag.draw(self.screen.displaysurf)
         self.heart.draw(self.screen.displaysurf)

@@ -1,4 +1,5 @@
 import src.dot.dotchild
+from src.utils.musiclibrary import play_sound
 from src.define import *
 
 
@@ -38,6 +39,7 @@ class DotRadar(src.dot.dotchild.DotChild):
     def handleEvent(self, inputResult):
         if not self.canMove:
             if inputResult == GameDefine.COMMAND_LEFT or inputResult == GameDefine.COMMAND_RIGHT:
+                play_sound('assets/music/effects/gotcha.wav')
                 self.parent.resetGame()
 
     def notifyCollide(self, collider):

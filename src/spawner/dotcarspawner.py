@@ -1,4 +1,6 @@
 import spawner
+import pygame
+from src.utils.musiclibrary import play_sound
 from src.dot.entities.dotcar import *
 from src.dot.entities.dotradar import *
 from src.utils.dice import *
@@ -35,6 +37,9 @@ class DotCarSpawner (spawner.Spawner):
                     cardice = PercentChance(25)
                     shouldDoubleSpeed = cardice.roll()
                     if shouldDoubleSpeed and not self.lastWasRadar and not self.lastWasDouble and not self.lastWasMiddle:
+                        play_sound('assets/music/effects/fast.wav')
+                        # effect = pygame.mixer.Sound('assets/music/effects/fast.wav')
+                        # effect.play()
                         self.spawnCar(parent, 2)
                     else:
                         print("Spawning normal car")

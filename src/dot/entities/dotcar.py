@@ -1,5 +1,6 @@
 import src.dot.dotchild
 from src.define import GameDefine
+from src.utils.musiclibrary import play_sound
 
 class DotCar(src.dot.dotchild.DotChild):
 
@@ -31,6 +32,7 @@ class DotCar(src.dot.dotchild.DotChild):
             return
 
         if collider.type == "hero":
+            play_sound('assets/music/effects/exploded.wav')
             self.parent.resetGame()
 
     def setTrail(self, trail):
