@@ -1,11 +1,13 @@
 import src.dot.dotcollection
 import pygame
 
+from src.dot.dotchild import DotChild
 from src.dot.entities.dothero import *
 from src.dot.entities.dotcar import *
 from src.dot.entities.simpledot import *
 
 from src.define import *
+
 
 class DotTrail(src.dot.dotcollection.DotCollection):
 
@@ -27,7 +29,7 @@ class DotTrail(src.dot.dotcollection.DotCollection):
         self.boostTime = 0
 
         self.screen = screen
-        self.basespeed = 4
+        self.basespeed = 16
         self.defaultFallSpeed = self.basespeed + (self.level * 10)
         self.actualFallSpeed = self.defaultFallSpeed
 
@@ -38,7 +40,7 @@ class DotTrail(src.dot.dotcollection.DotCollection):
 
         for row in range(0, 20):
             element = []
-            for column in range(0, 13):
+            for column in range(0, 11):
                 element.append(1)
             grid.append(element)
 
@@ -70,7 +72,7 @@ class DotTrail(src.dot.dotcollection.DotCollection):
         return self.hero.height * 3
 
     def getBorderWidth(self):
-        return dotget(2)
+        return dotget(1)
 
     def cleanChildren(self):
         for child in self.children:
@@ -88,6 +90,8 @@ class DotTrail(src.dot.dotcollection.DotCollection):
             childRect = pygame.Rect(child.getCoordinates(), child.getDimensions())
             if heroRect.colliderect(childRect):
                 child.notifyCollide(self.hero)
+            else:
+                child.notifyCollide(None)
 
     def resetGame(self):
         self.isActive = False
@@ -132,7 +136,10 @@ class DotTrail(src.dot.dotcollection.DotCollection):
 
         self.score += self.actualFallSpeed
         self.checkCollide()
-        src.dot.dotcollection.DotCollection.draw(self, displaysurf)
+
+
+
+        src.dot.dotcollection.DotCollection.draw(self, displaysurf, 2)
 
         self.updateLevel()
         self.updateFallSpeed()

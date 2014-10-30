@@ -13,6 +13,7 @@ class DotCarSpawner (spawner.Spawner):
         self.canSpawn = True
         self.lastWasRadar = False
         self.lastWasDouble = False
+        self.lastWasMiddle = False
 
 
     def spawn(self, parent):
@@ -33,7 +34,7 @@ class DotCarSpawner (spawner.Spawner):
                     print("Speed chance: ")
                     cardice = PercentChance(25)
                     shouldDoubleSpeed = cardice.roll()
-                    if shouldDoubleSpeed and not self.lastWasRadar and not self.lastWasDouble:
+                    if shouldDoubleSpeed and not self.lastWasRadar and not self.lastWasDouble and not self.lastWasMiddle:
                         self.spawnCar(parent, 2)
                     else:
                         print("Spawning normal car")
@@ -50,6 +51,11 @@ class DotCarSpawner (spawner.Spawner):
         dice = Dice(0, maxTrail - 1)
         electedTrail = dice.roll()
 
+        if electedTrail == 1:
+            self.lastWasMiddle = True
+        else:
+            self.lastWasMiddle = False
+
         chance = (maxTrail - 2) * 20
         doubleDice = PercentChance(chance)
         shouldDouble = doubleDice.roll()
@@ -57,10 +63,12 @@ class DotCarSpawner (spawner.Spawner):
         # Check if there is a 'double' enemy
         if shouldDouble and speed == 1:
             if electedTrail == (maxTrail - 1):
-                electedTrail -= 1
+                subtrail = 0
+            else:
+                subtrail = electedTrail + 1
 
             self.addEnemyToWorld(parent, electedTrail, speed)
-            self.addEnemyToWorld(parent, electedTrail + 1, speed)
+            self.addEnemyToWorld(parent, subtrail, speed)
             self.lastWasDouble = True
             self.lastWasRadar = False
         else:
@@ -71,12 +79,13 @@ class DotCarSpawner (spawner.Spawner):
         self.latestSpawnTime = 0
 
     def spawnRadar(self, parent):
-        radar = DotRadar(13, 10, self)
+        radar = DotRadar(9, 10, self)
         radar.y -= radar.height
 
         parent.addChild(radar)
         self.lastWasRadar = True
         self.lastWasDouble = False
+        self.lastWasMiddle = False
 
     def addEnemyToWorld(self, parent, trail, speed):
         enemy = DotCar()

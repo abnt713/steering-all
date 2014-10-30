@@ -9,6 +9,10 @@ class DotChild(dotentity.DotEntity):
 
     def attachToCollection(self, parent):
         self.parent = parent
+        self.onAttachToCollection()
+
+    def onAttachToCollection(self):
+        pass
 
     def onDispose(self):
         pass

@@ -1,5 +1,5 @@
 import src.dot.dotchild
-from src.define import GameDefine
+from src.define import *
 
 
 class DotRadar(src.dot.dotchild.DotChild):
@@ -21,7 +21,12 @@ class DotRadar(src.dot.dotchild.DotChild):
             grid.append(element)
 
         src.dot.dotchild.DotChild.__init__(self, grid, res)
-        self.x = 0
+        self.setDotAlpha(55)
+
+    def onAttachToCollection(self):
+        print(self.parent.getBorderWidth())
+        print(self.x)
+        self.x = self.parent.getBorderWidth() + self.parent.x
 
     def step(self):
         if self.parent.shouldFall:
@@ -30,13 +35,16 @@ class DotRadar(src.dot.dotchild.DotChild):
         if self.y > self.height:
             self.spawner.canSpawn = True
 
-        self.canMove = True
-
     def handleEvent(self, inputResult):
         if not self.canMove:
             if inputResult == GameDefine.COMMAND_LEFT or inputResult == GameDefine.COMMAND_RIGHT:
                 self.parent.resetGame()
 
     def notifyCollide(self, collider):
+
+        if collider is None:
+            self.canMove = True
+            return
+
         if collider.type == "hero":
             self.canMove = False

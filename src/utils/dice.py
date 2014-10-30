@@ -10,7 +10,6 @@ class PercentChance:
 
   def roll(self):
     selected = random.randint(0, 100)
-    print(selected)
     if selected < self.chance:
       return True
     else:

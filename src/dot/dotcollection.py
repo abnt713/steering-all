@@ -13,9 +13,15 @@ class DotCollection(dotentity.DotEntity, src.interact.listener.InteractListener)
     child.attachToCollection(self)
     self.children.append(child)
 
-  def draw(self, displaysurf):
+  def draw(self, displaysurf, order=1):
     dotentity.DotEntity.draw(self, displaysurf)
-    for child in self.children:
+
+    if order == 1:
+        list = self.children
+    else:
+        list = reversed(self.children)
+
+    for child in list:
       child.step()
       child.createSurface()
 

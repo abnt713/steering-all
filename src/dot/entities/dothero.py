@@ -5,6 +5,7 @@ class DotHero(dotcar.DotCar):
 
     def __init__(self):
         dotcar.DotCar.__init__(self)
+        self.setDotRes(["assets/img/blue-brick.png"])
         self.type = "hero"
 
     def step(self):

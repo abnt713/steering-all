@@ -27,6 +27,9 @@ class DotCar(src.dot.dotchild.DotChild):
         self.x = self.parent.getBorderWidth() + (self.width * self.trail) + self.parent.x
 
     def notifyCollide(self, collider):
+        if collider is None:
+            return
+
         if collider.type == "hero":
             self.parent.resetGame()
 
