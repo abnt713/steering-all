@@ -43,8 +43,13 @@ class DotHUD(src.dot.dotcollection.DotCollection):
 
         self.addChild(self.liveslabel)
 
+        # Signal
+        self.signallabel = DotText("Text", 32, (0, 0, 0), (255, 255, 255))
+        self.signallabel.marginTop(dotget(3))
+        self.signallabel.below(self.liveslabel)
+        self.signallabel.centerRelativeX(self)
 
-
+        self.addChild(self.signallabel)
 
     def set_score(self, score):
         self.scorelabel.setText("Score: " + str(score))
@@ -63,4 +68,17 @@ class DotHUD(src.dot.dotcollection.DotCollection):
         self.speedlabel.marginTop(dotget(1))
         self.speedlabel.below(self.scorelabel)
         self.speedlabel.centerRelativeX(self)
+
+    def set_lost(self, lost):
+        if lost:
+            self.signallabel.setText("Signal Lost")
+            self.signallabel.marginBottom(dotget(1))
+            self.signallabel.alignBottom(self.height)
+            self.signallabel.centerRelativeX(self)
+        else:
+            self.signallabel.setText("")
+            self.signallabel.marginBottom(dotget(1))
+            self.signallabel.alignBottom(self.height)
+            self.signallabel.centerRelativeX(self)
+
 

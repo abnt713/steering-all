@@ -40,6 +40,12 @@ class KeyboardInteract(evtInteract.EvtInteract):
                 if event.key == pygame.K_ESCAPE:
                     self.listener.listen(GameDefine.COMMAND_EXIT)
 
+                if event.key == pygame.K_0:
+                    self.listener.listen(GameDefine.COMMAND_SIGNAL_LOST)
+
+                if event.key == pygame.K_1:
+                    self.listener.listen(GameDefine.COMMAND_SIGNAL_FOUND)
+
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     self.goingLeft = False

@@ -13,6 +13,7 @@ from src.dot.entities.dottrail import DotTrail
 class DotGame(dotworld.DotWorld):
     def __init__(self, lives=3, score=0, level=1, startMusic = False):
         self.startMusic = startMusic
+        self.has_signal = True
         self.score = score
         self.lives = lives
         self.level = level
@@ -43,6 +44,12 @@ class DotGame(dotworld.DotWorld):
         if inputResult == GameDefine.COMMAND_EXIT:
             self.screen.turnOff()
 
+        if inputResult == GameDefine.COMMAND_SIGNAL_LOST:
+            self.has_signal = False
+
+        if inputResult == GameDefine.COMMAND_SIGNAL_FOUND:
+            self.has_signal = True
+
         self.trail.listen(inputResult)
 
     def step(self):
@@ -54,6 +61,7 @@ class DotGame(dotworld.DotWorld):
         self.hud.set_score(self.trail.score / GameDefine.SCORE_DECIMAL)
         self.hud.set_speed(self.trail.actualFallSpeed / self.trail.defaultFallSpeed)
         self.hud.set_level(self.trail.level)
+        self.hud.set_lost(not self.has_signal)
         self.hud.draw(self.screen.displaysurf)
 
         if self.lives <= 0:

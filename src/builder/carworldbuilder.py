@@ -1,7 +1,7 @@
 import worldbuilder
 from src.spawner.spawnercollector import *
 from src.spawner.enemyspawner import *
-from src.interact.faceInteract import *
+from src.interact.cascadeInteract import *
 from src.entities.carentity import *
 from src.world.carworld import *
 from src.world.drawing.carworldrender import *

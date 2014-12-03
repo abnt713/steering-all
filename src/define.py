@@ -17,6 +17,10 @@ class GameDefine:
     COMMAND_BOOST = 3
     COMMAND_UNBOOST = 4
 
+    COMMAND_TRAIL_LEFT = 5
+    COMMAND_TRAIL_CENTER = 6
+    COMMAND_TRAIL_RIGHT = 7
+
     # Color definitions
     COLOR_TRAIL = (208, 208, 208)
     COLOR_DIVIDER = (32, 32, 32)

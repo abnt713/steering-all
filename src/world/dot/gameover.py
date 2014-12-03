@@ -1,7 +1,10 @@
+import pygame
+
 import dotworld
 import menuworld
 from src.define import *
 from src.draw.dottext import DotText
+
 
 class GameOver(dotworld.DotWorld):
 
@@ -16,7 +19,7 @@ class GameOver(dotworld.DotWorld):
         self.scorelabel = DotText("Score: " + str(int(score / GameDefine.SCORE_DECIMAL)), 24, (0, 0, 0), (255, 255, 255))
 
     def onAttachScreen(self):
-
+        pygame.mixer.music.stop()
         self.label.centerX(self.screen.width)
         self.label.centerY(self.screen.height)
 
@@ -25,7 +28,6 @@ class GameOver(dotworld.DotWorld):
         self.scorelabel.below(self.label)
 
     def changeAlpha(self):
-
         self.label.surface.set_alpha(self.alpha)
         self.scorelabel.surface.set_alpha(self.alpha)
 

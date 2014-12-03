@@ -18,5 +18,14 @@ class DotHero(dotcar.DotCar):
         if inputResult == GameDefine.COMMAND_RIGHT and self.trail < 2:
             self.trail += 1
 
+        if inputResult == GameDefine.COMMAND_TRAIL_CENTER:
+            self.trail = 1
+
+        if inputResult == GameDefine.COMMAND_TRAIL_LEFT:
+            self.trail = 0
+
+        if inputResult == GameDefine.COMMAND_TRAIL_RIGHT:
+            self.trail = 2
+
     def notifyCollide(self, collider):
         pass

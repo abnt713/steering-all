@@ -2,6 +2,7 @@ from src.dot.entities.dotgoblet import DotGoblet
 from src.dot.entities.dotflag import DotFlag
 from src.dot.entities.dotheart import DotHeart
 from src.draw.dottext import DotText
+from src.utils.musiclibrary import play_sound
 from dotgame import *
 
 
@@ -103,14 +104,16 @@ class MenuWorld(dotworld.DotWorld):
             return self.goblet
 
     def listen(self, inputResult):
-        if(inputResult == GameDefine.COMMAND_EXIT):
+        if inputResult == GameDefine.COMMAND_EXIT:
             self.screen.turnOff()
 
         if inputResult == GameDefine.COMMAND_RIGHT:
+            play_sound('assets/music/effects/select.wav')
             self.selected = (self.selected + 1) % 3
             self.drawMenu()
 
         if inputResult == GameDefine.COMMAND_LEFT:
+            play_sound('assets/music/effects/select.wav')
             nextSelect = (self.selected - 1)
             if(nextSelect < 0):
                 nextSelect = 2
@@ -118,6 +121,7 @@ class MenuWorld(dotworld.DotWorld):
             self.drawMenu()
 
         if inputResult == GameDefine.COMMAND_BOOST:
+            play_sound('assets/music/effects/levelup.wav')
             self.isPressing = True
 
         if (inputResult == GameDefine.COMMAND_UNBOOST) and self.isPressing == True:
