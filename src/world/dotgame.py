@@ -1,6 +1,5 @@
 import dotworld
 import gameover
-import pygame
 
 from src.spawner.dotcarspawner import *
 from src.spawner.dotborderspawner import *
@@ -20,7 +19,6 @@ class DotGame(dotworld.DotWorld):
         self.hud = DotHUD(lives)
         self.enemySpawner = None
         dotworld.DotWorld.__init__(self)
-
 
     def onAttachScreen(self):
         self.trail = DotTrail(self.screen, self.score, self.level)

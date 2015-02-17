@@ -1,7 +1,7 @@
 from src.dot.entities.dotgoblet import DotGoblet
 from src.dot.entities.dotflag import DotFlag
 from src.dot.entities.dotheart import DotHeart
-from src.draw.dottext import DotText
+from src.dot.dottext import DotText
 from src.utils.musiclibrary import play_sound
 from dotgame import *
 

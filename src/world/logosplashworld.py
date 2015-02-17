@@ -2,7 +2,8 @@ import dotworld
 import ufrnsplashworld
 from src.define import *
 from src.dot.entities.dotlogo import DotLogo
-from src.draw.dottext import DotText
+from src.dot.dottext import DotText
+
 
 class LogoSplashWorld(dotworld.DotWorld):
 

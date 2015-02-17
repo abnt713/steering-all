@@ -3,7 +3,7 @@ import pygame
 
 from src.dot.entities.dotcar import *
 from src.dot.entities.simpledot import *
-from src.draw.dottext import *
+from src.dot.dottext import *
 from src.define import dotget
 
 

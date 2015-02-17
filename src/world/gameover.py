@@ -3,7 +3,7 @@ import pygame
 import dotworld
 import menuworld
 from src.define import *
-from src.draw.dottext import DotText
+from src.dot.dottext import DotText
 
 
 class GameOver(dotworld.DotWorld):

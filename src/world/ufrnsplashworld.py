@@ -3,7 +3,7 @@ import dotworld
 from menuworld import MenuWorld
 from src.define import *
 from src.dot.entities.dotufrn import DotUFRN
-from src.draw.dottext import DotText
+from src.dot.dottext import DotText
 
 class UfrnSplashWorld(dotworld.DotWorld):
 
