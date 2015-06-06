@@ -6,6 +6,9 @@ from src.dot.entities.simpledot import *
 from src.dot.dottext import *
 from src.define import dotget
 
+import i18n
+_ = i18n.language.ugettext
+
 
 class DotHUD(src.dot.dotcollection.DotCollection):
     def __init__(self, lives):
@@ -21,22 +24,22 @@ class DotHUD(src.dot.dotcollection.DotCollection):
         src.dot.dotcollection.DotCollection.__init__(self, grid, res)
 
         # Adding the score label
-        self.scorelabel = self.scorelabel = DotText("Score: 0", 32, (0, 0, 0), (255, 255, 255))
+        self.scorelabel = self.scorelabel = DotText(_("Score") + ": 0", 32, (0, 0, 0), (255, 255, 255))
         self.set_score(0)
         self.addChild(self.scorelabel)
 
         # Speed
-        self.speedlabel = DotText("Speed: 0", 32, (0, 0, 0), (255, 255, 255))
+        self.speedlabel = DotText(_("Speed") + ": 0", 32, (0, 0, 0), (255, 255, 255))
         self.set_speed(0)
         self.addChild(self.speedlabel)
 
         # Level
-        self.levellabel = DotText("Level: 0", 32, (0, 0, 0), (255, 255, 255))
+        self.levellabel = DotText(_("Level") + ": 0", 32, (0, 0, 0), (255, 255, 255))
         self.set_level(1)
         self.addChild(self.levellabel)
 
         # Lives
-        self.liveslabel = DotText("Lives: " + str(lives), 32, (0, 0, 0), (255, 255, 255))
+        self.liveslabel = DotText(_("Lives") + ": " + str(lives), 32, (0, 0, 0), (255, 255, 255))
         self.liveslabel.marginTop(dotget(2))
         self.liveslabel.below(self.levellabel)
         self.liveslabel.centerRelativeX(self)
@@ -52,26 +55,26 @@ class DotHUD(src.dot.dotcollection.DotCollection):
         self.addChild(self.signallabel)
 
     def set_score(self, score):
-        self.scorelabel.setText("Score: " + str(score))
+        self.scorelabel.setText(_("Score") + ": " + str(score))
         self.scorelabel.marginTop(dotget(2))
         self.scorelabel.alignTop()
         self.scorelabel.centerRelativeX(self)
 
     def set_level(self, level):
-        self.levellabel.setText("Level: " + str(level))
+        self.levellabel.setText(_("Level") + ": " + str(level))
         self.levellabel.marginTop(dotget(1))
         self.levellabel.below(self.speedlabel)
         self.levellabel.centerRelativeX(self)
 
     def set_speed(self, speed):
-        self.speedlabel.setText("Speed: " + str(speed))
+        self.speedlabel.setText(_("Speed") + ": " + str(speed))
         self.speedlabel.marginTop(dotget(1))
         self.speedlabel.below(self.scorelabel)
         self.speedlabel.centerRelativeX(self)
 
     def set_lost(self, lost):
         if lost:
-            self.signallabel.setText("Signal Lost")
+            self.signallabel.setText(_("Signal Lost"))
             self.signallabel.marginBottom(dotget(1))
             self.signallabel.alignBottom(self.height)
             self.signallabel.centerRelativeX(self)

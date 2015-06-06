@@ -2,8 +2,10 @@ from src.dot.entities.dotgoblet import DotGoblet
 from src.dot.entities.dotflag import DotFlag
 from src.dot.entities.dotheart import DotHeart
 from src.dot.dottext import DotText
-from src.utils.musiclibrary import play_sound
 from dotgame import *
+
+import i18n
+_ = i18n.language.ugettext
 
 
 class MenuWorld(dotworld.DotWorld):
@@ -24,9 +26,9 @@ class MenuWorld(dotworld.DotWorld):
         self.heart = DotHeart()
 
         self.possibleLabels = {
-            self.SELECTION_RACE: "Iniciar corrida",
-            self.SELECTION_CREDITS: "Creditos",
-            self.SELECTION_OPTIONS: "Opcoes"
+            self.SELECTION_RACE: _("Start Race"),
+            self.SELECTION_CREDITS: _("Credits"),
+            self.SELECTION_OPTIONS: _("Options")
         }
         self.isPressing = False
         self.selected = self.SELECTION_RACE
@@ -54,23 +56,23 @@ class MenuWorld(dotworld.DotWorld):
         self.label.below(selectedItem)
         self.label.centerX(self.screen.width)
 
-        previousItem = self.getPreviousItem()
-        previousItem.setDotAlpha(self.UNSELECTED_ALPHA)
-        previousItem.setSmall()
-        previousItem.createSurface()
-        previousItem.marginLeft(dotget(1))
-        previousItem.alignLeft()
-
-        previousItem.centerY(self.screen.height)
-
-        nextItem = self.getNextItem()
-        nextItem.setDotAlpha(self.UNSELECTED_ALPHA)
-        nextItem.setSmall()
-        nextItem.createSurface()
-        nextItem.marginRight(dotget(1))
-        nextItem.alignRight(self.screen.width)
-
-        nextItem.centerY(self.screen.height)
+        # previousItem = self.getPreviousItem()
+        # previousItem.setDotAlpha(self.UNSELECTED_ALPHA)
+        # previousItem.setSmall()
+        # previousItem.createSurface()
+        # previousItem.marginLeft(dotget(1))
+        # previousItem.alignLeft()
+        #
+        # previousItem.centerY(self.screen.height)
+        #
+        # nextItem = self.getNextItem()
+        # nextItem.setDotAlpha(self.UNSELECTED_ALPHA)
+        # nextItem.setSmall()
+        # nextItem.createSurface()
+        # nextItem.marginRight(dotget(1))
+        # nextItem.alignRight(self.screen.width)
+        #
+        # nextItem.centerY(self.screen.height)
 
 
     def getSelectedItem(self):
@@ -107,18 +109,18 @@ class MenuWorld(dotworld.DotWorld):
         if inputResult == GameDefine.COMMAND_EXIT:
             self.screen.turnOff()
 
-        if inputResult == GameDefine.COMMAND_RIGHT:
-            play_sound('assets/music/effects/select.wav')
-            self.selected = (self.selected + 1) % 3
-            self.drawMenu()
-
-        if inputResult == GameDefine.COMMAND_LEFT:
-            play_sound('assets/music/effects/select.wav')
-            nextSelect = (self.selected - 1)
-            if(nextSelect < 0):
-                nextSelect = 2
-            self.selected = nextSelect
-            self.drawMenu()
+        # if inputResult == GameDefine.COMMAND_RIGHT:
+        #     play_sound('assets/music/effects/select.wav')
+        #     self.selected = (self.selected + 1) % 3
+        #     self.drawMenu()
+        #
+        # if inputResult == GameDefine.COMMAND_LEFT:
+        #     play_sound('assets/music/effects/select.wav')
+        #     nextSelect = (self.selected - 1)
+        #     if(nextSelect < 0):
+        #         nextSelect = 2
+        #     self.selected = nextSelect
+        #     self.drawMenu()
 
         if inputResult == GameDefine.COMMAND_BOOST:
             play_sound('assets/music/effects/levelup.wav')
@@ -131,6 +133,6 @@ class MenuWorld(dotworld.DotWorld):
     def step(self):
         self.logo.draw(self.screen.displaysurf)
         self.goblet.draw(self.screen.displaysurf)
-        self.flag.draw(self.screen.displaysurf)
-        self.heart.draw(self.screen.displaysurf)
+        # self.flag.draw(self.screen.displaysurf)
+        # self.heart.draw(self.screen.displaysurf)
         self.label.draw(self.screen.displaysurf)

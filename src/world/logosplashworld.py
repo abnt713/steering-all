@@ -1,8 +1,11 @@
 import dotworld
 import ufrnsplashworld
 from src.define import *
-from src.dot.entities.dotlogo import DotLogo
+from src.dot.entities.dotpairg import DotPairg
 from src.dot.dottext import DotText
+
+import i18n
+_ = i18n.language.ugettext
 
 
 class LogoSplashWorld(dotworld.DotWorld):
@@ -14,10 +17,12 @@ class LogoSplashWorld(dotworld.DotWorld):
         self.alpha = 0
         self.animState = 1
 
-        self.logo = DotLogo()
-        self.label = DotText("Nightingale Dvlp", 32, (0, 0, 0), (255, 255, 255))
+        self.logo = DotPairg()
+        self.label = DotText("PAIRG - Physical Artifacts of Interaction Research Group", 16, (0, 0, 0), (255, 255, 255))
+        self.sublabel = DotText(_("Developed by") + " Alison Bento", 16, (0, 0, 0), (255, 255, 255))
 
     def onAttachScreen(self):
+        self.logo.setMedium()
         self.logo.centerX(self.screen.width)
         self.logo.centerY(self.screen.height)
         self.logo.createSurface()
@@ -26,13 +31,21 @@ class LogoSplashWorld(dotworld.DotWorld):
         self.label.marginTop(dotget(1))
         self.label.below(self.logo)
 
+        self.sublabel.centerX(self.screen.width)
+        self.sublabel.marginTop(dotget(1))
+        self.sublabel.below(self.label)
+
     def changeAlpha(self):
         self.logo.setDotAlpha(self.alpha)
-        self.logo.createSurface()
+        # self.logo.createSurface()
 
         self.label.surface.set_alpha(self.alpha)
+        self.sublabel.surface.set_alpha(self.alpha)
 
     def listen(self, inputResult):
+        if inputResult == GameDefine.COMMAND_EXIT:
+            self.screen.turnOff()
+
         if inputResult == GameDefine.COMMAND_BOOST:
             self.pause()
 
@@ -42,6 +55,7 @@ class LogoSplashWorld(dotworld.DotWorld):
 
             self.logo.draw(self.screen.displaysurf)
             self.label.draw(self.screen.displaysurf)
+            self.sublabel.draw(self.screen.displaysurf)
 
             self.counter += 1
 

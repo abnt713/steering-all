@@ -29,7 +29,7 @@ class GameDefine:
     COLOR_FONT_CONSOLE = (0, 0, 0)
 
     # General Purpose settings
-    GAME_TITLE = "Steering Key"
+    GAME_TITLE = "Steering All"
 
     SPEED_COLORS = [
         (113, 186, 53),

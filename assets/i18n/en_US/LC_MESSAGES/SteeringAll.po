@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SteeringAll\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-24 12:49-0300\n"
+"PO-Revision-Date: 2015-04-24 15:30-0300\n"
+"Last-Translator: \n"
+"Language-Team: Alison Bento <alisonbnt@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: English\n"
+
+#: src/dot/entities/dothud.py:27 src/dot/entities/dothud.py:58
+msgid "Score"
+msgstr "Score"
+
+#: src/dot/entities/dothud.py:32 src/dot/entities/dothud.py:70
+msgid "Speed"
+msgstr "Speed"
+
+#: src/dot/entities/dothud.py:37 src/dot/entities/dothud.py:64
+msgid "Level"
+msgstr "Level"
+
+#: src/dot/entities/dothud.py:42
+msgid "Lives"
+msgstr "Lives"
+
+#: src/dot/entities/dothud.py:77
+msgid "Signal Lost"
+msgstr "Signal Lost"
+
+#: src/world/menuworld.py:29
+msgid "Start Race"
+msgstr "Start Race"
+
+#: src/world/menuworld.py:30
+msgid "Credits"
+msgstr "Credits"
+
+#: src/world/menuworld.py:31
+msgid "Options"
+msgstr "Options"

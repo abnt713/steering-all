@@ -1,10 +1,8 @@
-import pygame
 import traceback
 from src.dot.dotscreen import DotScreen
 from src.interact.keyboardinteract import *
 from src.interact.mouseinteract import *
-from src.interact.cascadeInteract import CascadeInteract
-from src.interact.cascadeFollowerInteract import CascadeFollowerInteract
+import i18n
 
 from src.define import GameDefine
 from src.world.logosplashworld import LogoSplashWorld
@@ -15,10 +13,10 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 
 def main():
-    screen = DotScreen(dotget(GameDefine.WINDOW_WIDTH), dotget(GameDefine.WINDOW_HEIGHT), GameDefine.FPS)
+    screen = DotScreen(dotget(GameDefine.WINDOW_WIDTH), dotget(GameDefine.WINDOW_HEIGHT), GameDefine.FPS, 0)
     screen.addEventInteract(KeyboardInteract())
     screen.addEventInteract(MouseInteract())
-    # screen.addEventInteract(MouseInteract())
+    screen.addEventInteract(MouseInteract())
 
     # face_interact = CascadeFollowerInteract(1, 2, "assets/cascade/hand.xml")
     # face_interact = CascadeFollowerInteract(1, 0, "assets/cascade/haarcascade_frontalface_alt.xml")
